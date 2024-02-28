@@ -58,6 +58,10 @@ const Login = () => {
           secureTextEntry
           />
 
+        <TouchableOpacity style={styles.signupButton} >
+          <Text style={styles.buttonText}>CADASTRAR</Text>
+        </TouchableOpacity>
+
       </View>
     )
   }
