@@ -2,14 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput,Button, TouchableOpacity,FlatList } from 'react-native';
 
 
-const ListaContato = () => {
+
+
+const ListaContato = ({navigation}) => {
     return(
       <View style={styles.container}>
         
 
-        <Text style={styles.bordacabecalho} >Lista de contato</Text>
+        <Text style={styles.bordacabecalho} onPress={()=>navigation.navigate('Cadcontato')}>Lista de contato</Text>
 
         <View style={styles.container2}>
+          
       <FlatList
         data={[
           {key: 'Devin'},
@@ -19,7 +22,7 @@ const ListaContato = () => {
           {key: 'James'},
           
         ]}
-        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+        renderItem={({item}) => <Text onPress={()=>navigation.navigate('Alterar')} style={styles.item}>{item.key}</Text>}
       />
     </View>
       
@@ -48,6 +51,7 @@ const ListaContato = () => {
     padding: 10,
     fontSize: 28,
     height: 44,
+    borderWidth: 1,
   },
   title: {
     fontSize: 15,

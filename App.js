@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './login';
 import Cadastro from './cadastro';
 import ListaContato from './listacontato';
+import Alterar from './alterarexcluir';
+import Cadcontato from './cad';
 
 
 
@@ -17,6 +19,8 @@ return (
 <Stack.Screen name="Home" component={Login} />
 <Stack.Screen name="Cadastrar" component={Cadastro} />
 <Stack.Screen name="Listar" component={ListaContato} />
+<Stack.Screen name="Alterar" component={Alterar} />
+<Stack.Screen name="Cadcontato" component={Cadcontato} />
 
 </Stack.Navigator>
 </NavigationContainer>
