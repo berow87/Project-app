@@ -1,8 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput,Button, TouchableOpacity } from 'react-native';
+import React,{useState} from 'react';
+import axios from 'axios';
 
 
 const Cadastro = ({navigation}) => {
+
+    const [nome,setNome] = useState('')
+    const [cpf,setCpf] = useState('')
+    const [email,setEmail] = useState('')
+    const [senha,setSenha] = useState('')
+
+
+    const cadastrarUsuario = async () => {
+      try {
+        const response = await axios.post('http://localhost:3000/usuarios', {
+          nome,
+          email,
+          senha,
+          cpf
+        });
+  
+        console.log('Usuário cadastrado com sucesso:', response.data);
+        // Você pode realizar outras ações após o cadastro, se necessário
+  
+      } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error);
+      }
+    
+      
+
+    };
+
     return(
       <View style={styles.container}>
         
@@ -11,29 +40,34 @@ const Cadastro = ({navigation}) => {
         <Text style={styles.title}>Nome</Text>
           <TextInput
           style={styles.input}
-        
+          onChangeText={setNome}
+          value={nome}
           />
 
         <Text style={styles.title}>CPF</Text>
           <TextInput
           style={styles.input}
-        
+          onChangeText={setCpf}
+          value={cpf}
           />
 
 
         <Text style={styles.title}>Email</Text>
           <TextInput
           style={styles.input}
-        
+          onChangeText={setEmail}
+          value={email}
           />
 
         <Text style={styles.title}>Senha</Text>
           <TextInput
           style={styles.input}
           secureTextEntry
+          onChangeText={setSenha}
+          value={senha}
           />
 
-        <TouchableOpacity style={styles.signupButton} >
+        <TouchableOpacity style={styles.signupButton} onPress={cadastrarUsuario}>
           <Text style={styles.buttonText}>SALVAR</Text>
         </TouchableOpacity>
 
