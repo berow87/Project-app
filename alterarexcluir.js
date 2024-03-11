@@ -1,9 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput,Button, TouchableOpacity } from 'react-native';
+import axios from 'axios';
+import React,{useState} from 'react';
 
 
 const Alterar = ({navigation}) => {
-    return(
+    
+  
+  const [nome,setNome] = useState('')
+  const [telefone,setTelefone] = useState('')
+  const [email,setEmail] = useState('')
+  
+
+
+
+  const alterarContato = async () => {
+    try {
+      const response = await axios.put('http://localhost:3000/contatos'+getid, {
+        nome,
+        email,
+        telefone
+        
+      });
+
+      console.log('contato alterado com sucesso:', response.data);
+
+    } catch (error) {
+      console.error('Erro ao alterar contato:', error);
+    };
+
+  
+
+
+    const deletarContato = async () => {
+      try {
+        const response = await axios.delete('http://localhost:3000/contatos'+getid, {
+          nome,
+          email,
+          telefone
+          
+        });
+  
+        console.log('contato Deletado:', response.data);
+  
+      } catch (error) {
+        console.error('Erro ao deletar contato:', error);
+      };
+
+    
+  
+    }
+
+  }
+    
+
+    
+  
+  return(
       <View style={styles.container}>
         
         <Text style={styles.bordacabecalho} onPress={()=>navigation.navigate('Listar')}>contato</Text>
@@ -11,32 +64,35 @@ const Alterar = ({navigation}) => {
         <Text style={styles.title}>Nome</Text>
           <TextInput
           style={styles.input}
-        
+          onChangeText={setNome}
+          value={nome}
           />
 
 
         <Text style={styles.title}>Email</Text>
           <TextInput
           style={styles.input}
-        
+          onChangeText={setEmail}
+          value={email}
           />
 
 
         <Text style={styles.title}>Telefone</Text>
           <TextInput
           style={styles.input}
-        
+          onChangeText={setTelefone}
+          value={telefone}
           />
 
 
-        <TouchableOpacity style={styles.loginButton} >
+        <TouchableOpacity style={styles.loginButton} onPress={alterarContato} >
           <Text style={styles.buttonText}>Alterar</Text>
         </TouchableOpacity>
 
 
         
 
-        <TouchableOpacity style={styles.signupButton} >
+        <TouchableOpacity style={styles.signupButton} onPress={deletarContato} >
           <Text style={styles.buttonText}>Excluir</Text>
         </TouchableOpacity>
 

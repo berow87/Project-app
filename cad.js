@@ -2,11 +2,40 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput,Button, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import React,{useState} from 'react';
+import axios from 'axios';
+
 
 
 
 const Cadcontato = ({navigation}) => {
-    return (
+    
+  
+  const [nome,setNome] = useState('')
+  const [telefone,setTelefone] = useState('')
+  const [email,setEmail] = useState('')
+  
+  const cadastrarContato = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/contatos', {
+        nome,
+        email,
+        telefone,
+        
+      });
+
+      console.log('Contato cadastrado com sucesso:', response.data);
+
+    } catch (error) {
+      console.error('Erro ao cadastrar contato:', error);
+    }
+  
+    
+
+  };
+  
+  
+  return (
     <View style={styles.container}>
           
           <Text style={styles.bordacabecalho} onPress={()=>navigation.navigate('Listar')}>contato</Text>
@@ -14,23 +43,26 @@ const Cadcontato = ({navigation}) => {
           <Text style={styles.title}>Nome</Text>
           <TextInput
           style={styles.input}
-          
+          onChangeText={setNome}
+          value={nome}
           />
 
 
           <Text style={styles.title}>Email</Text>
           <TextInput
           style={styles.input}
-          
+          onChangeText={setEmail}
+          value={email}
           />
       
       <Text style={styles.title}>Telefone</Text>
           <TextInput
           style={styles.input}
-          
+          onChangeText={setTelefone}
+          value={telefone}
           />
   
-          <TouchableOpacity style={styles.loginButton} >
+          <TouchableOpacity style={styles.loginButton} onPress={cadastrarContato} >
             <Text style={styles.buttonText}>SALVAR</Text>
           </TouchableOpacity>
   

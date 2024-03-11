@@ -22,7 +22,6 @@ const Cadastro = ({navigation}) => {
         });
   
         console.log('Usuário cadastrado com sucesso:', response.data);
-        // Você pode realizar outras ações após o cadastro, se necessário
   
       } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);
