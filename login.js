@@ -1,12 +1,35 @@
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TextInput,Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,TextInput,Button, TouchableOpacity, } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import React,{useState} from 'react';
 
 
 
 const Login = ({navigation}) => {
-    return (
+    
+  const [email,setEmail] = useState('')
+  const [senha,setSenha] = useState('')
+
+  const handleLogin = () => {
+    createUserWithEmailAndPassword(auth, email, senha)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    
+    console.log(user);
+    setUser(user);
+
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+  }
+
+  return (
+
     <View style={styles.container}>
           
           <Icon name="users" size={80} color="#900" style={styles.icone}/>
@@ -15,16 +38,19 @@ const Login = ({navigation}) => {
           <Text style={styles.title}>Email</Text>
           <TextInput
           style={styles.input}
-          
+          onChangeText={setEmail}
+          value={email}
           />
       
           <Text style={styles.title}>Senha</Text>
           <TextInput
             style={styles.input}
             secureTextEntry
+            onChangeText={setSenha}
+            value={senha}
           />
   
-          <TouchableOpacity style={styles.loginButton} onPress={()=>navigation.navigate('Listar')}>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <Text style={styles.buttonText}>LOGIN</Text>
           </TouchableOpacity>
   
